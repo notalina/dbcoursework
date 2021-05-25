@@ -1,0 +1,28 @@
+{% extends 'base_with_header.html' %}
+
+{% block content %}
+<div class="container">
+    <div>
+        <table class='table'>
+            <thead>
+            <tr class="table-primary">
+                <th scope="col">Управление №</th>
+                <th scope="col">Номер телефона</th>
+                <th scope="col">Адрес управления</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% if all_managements%}
+                    {% for a in all_managements %}
+                    <tr>
+                        <th scope="row">{{a.id}}</th>
+                        <td> {{a.telephone}} </td> 
+                        <td>{{a.address}}</td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

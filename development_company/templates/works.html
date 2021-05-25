@@ -1,0 +1,63 @@
+{% extends 'base_with_header.html' %} {% block content %}
+
+<div class="container-sm">
+  <form
+    class="form-inline"
+    action="{% url 'development_company:works' %}"
+    method="GET"
+  >
+    <div class="row">
+      <div class="col">
+        <label> Укажите тип работы: </label>
+        <div>
+          <input type="text" name="work_tag_form" />
+        </div>
+      </div>
+      <div class="col">
+        <label> Укажите начало периода: </label>
+        <div>
+          <input type="date" name="start" />
+        </div>
+      </div>
+      <div class="col">
+        <label> Укажите конец периода: </label>
+        <div>
+          <input type="date" name="finish" />
+        </div>
+      </div>
+        <div class="col">
+          <button type="submit" class="btn btn-primary mb-2">Поиск</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="container-sm">
+    {% if worklist %}
+    <table class="table">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">№</th>
+          <th scope="col">Тип работы</th>
+          <th scope="col">Начало работы</th>
+          <th scope="col">Конец работы</th>
+          <th scope="col">Объект</th>
+          <th scope="col">Участок</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for w in worklist %}
+        <tr>
+          <th scope="row">{{w.id}}</th>
+          <td>{{w.tag}}</td>
+          <td>{{w.started}}</td>
+          <td>{{w.finished}}</td>
+          <td>{{w.obj}}</td>
+          <td>{{w.obj.sector}}</td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

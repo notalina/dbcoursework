@@ -1,0 +1,59 @@
+{% extends 'base_with_header.html' %} {% block content %}
+
+<div class="container">
+  <div>
+    <form
+      class="form-inline"
+      action="{% url 'development_company:staff' %}"
+      method="GET"
+    >
+      <div class="form-row">
+        <label> Укажите номер участка: </label>
+        <div class='col'>
+        <select class="form-control" name="sector">
+          {% for s in sectors %}
+          <option>{{s.id}}</option>
+          {% endfor %}
+        </select>
+        </div>
+        <div class='col'>
+        <button type="submit" class="btn btn-primary mb-2">Выбрать</button>
+        </div>
+      </div>
+    </form>
+    
+    {% if staff %}
+    <table class="table">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">№</th>
+          <th scope="col">ФИО</th>
+          <th scope="col">Номер паспорта</th>
+          <th scope="col">Дата рождения</th>
+          <th scope="col">Телефон</th>
+          <th scope="col">Специализация</th>
+          <th scope="col">Руководитель участка</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for st in staff%}
+        <tr>
+          <th scope="row">{{st.id}}</th>
+          <td>{{st.full_name}}</td>
+          <td>{{st.passport}}</td>
+          <td>{{st.birth_date}}</td>
+          <td>{{st.telephone}}</td>
+          <td>{{st.position}}</td>
+          {%if is_manager%}
+          <td>+</td>
+          {%else%}
+          <td>-</td>
+          {%endif%}
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base_with_header.html' %} {% block content %}
+
+<div class="container">
+  <div>
+    <form
+      class="form-inline"
+      action="{% url 'development_company:estimations' %}"
+      method="GET"
+    >
+      <div class="form-row">
+        <label> Укажите номер объекта: </label>
+        <div class='col'>
+        <select class="form-control" name="obj">
+          {% for o in objs %}
+          <option>{{o.id}}</option>
+          {% endfor %}
+        </select>
+        </div>
+        <div class='col'>
+        <button type="submit" class="btn btn-primary mb-2">Выбрать</button>
+      </div>
+      </div>
+    </form>
+
+    {% if estimation %}
+    <table class="table">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">Тип работы</th>
+          <th scope="col">Начало работы</th>
+          <th scope="col">Конец</th>
+          <th scope="col">Материал</th>
+          <th scope="col">Количество</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for e in estimation %}
+          {% for some_item in e%}
+            {% if forloop.counter == 1%}
+            <tr>
+              <td>{{some_item.work_type.tag}}</td>
+              <td>{{some_item.work_type.started}}</td>
+              <td>{{some_item.work_type.finished}}</td>
+              <td>{{some_item.item}}</td>
+              <td>{{some_item.quantity}}</td>
+            </tr>
+            {% else %}
+            <tr>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td>{{some_item.item}}</td>
+              <td>{{some_item.quantity}}</td>
+            </tr>
+            {% endif %}
+            {%endfor%}
+        {%endfor%}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base_with_header.html' %} {% block content %}
+
+<div class="container">
+  <div>
+    <form
+      class="form-inline"
+      action="{% url 'development_company:objs' %}"
+      method="GET"
+    >
+      <div class="form-row">
+        <label> Укажите номер участка: </label>
+        <div class='col'>
+        <select class="form-control" name="sector">
+          {% for s in sectors %}
+          <option>{{s.id}}</option>
+          {% endfor %}
+        </select>
+        </div>
+        <div class='col'>
+        <button type="submit" class="btn btn-primary mb-2">Выбрать</button>
+      </div>
+      </div>
+    </form>
+
+    {% if spec %}
+    <table class="table">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">№</th>
+          <th scope="col">Название</th>
+          <th scope="col">Дата завершения</th>
+          <th scope="col">Характеристика</th>
+          <th scope="col">Значение</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for list in spec%}
+        {% for s in list %}
+        <tr>
+          {% if forloop.counter == 1%}
+          <th scope="row">{{s.obj.id}}</th>
+          <td>{{s.obj.obj_name}}</td>
+          <td>{{s.obj.finsih_to}}</td>
+          <td>{{s.tag}}</td>
+          <td>{{s.note}}</td>
+          {% else %}
+          <th scope="row"> </th>
+          <td> </td>
+          <td> </td>
+          <td>{{s.tag}}</td>
+          <td>{{s.note}}</td>
+          {% endif %}
+        </tr>
+        {%endfor%}
+        {%endfor%}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

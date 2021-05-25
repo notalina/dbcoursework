@@ -1,0 +1,66 @@
+{% extends 'base_with_header.html' %} {% block content %}
+
+<div class="container">
+  <div>
+    <form
+      class="form-inline"
+      action="{% url 'development_company:reports' %}"
+      method="GET"
+    >
+      <div class="form-row">
+        <label> Укажите номер объекта: </label>
+        <div class='col'>
+        <select class="form-control" name="obj">
+          {% for o in objs %}
+          <option>{{o.id}}</option>
+          {% endfor %}
+        </select>
+        </div>
+        <div class='col'>
+        <button type="submit" class="btn btn-primary mb-2">Выбрать</button>
+      </div>
+      </div>
+    </form>
+
+    {% if consumption %}
+    <table class="table">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">#</th>
+          <th scope="col">Тип работы</th>
+          <th scope="col">Начало работы</th>
+          <th scope="col">Конец</th>
+          <th scope="col">Материал</th>
+          <th scope="col">Расход</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in consumption %}
+          {% for item in c %}
+            {% if forloop.counter == 1%}
+            <tr>
+              <th scope="row">{{item.report.work_type.id}}</th>
+              <td>{{item.report.work_type.tag}}</td>
+              <td>{{item.report.started_actual}}</td>
+              <td>{{item.report.finished_actual}}</td>
+              <td>{{item.item}}</td>
+              <td>{{item.quantity}}</td>
+            </tr>
+            {% else %}
+            <tr>
+              <th scope="row"> </th>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td>{{item.item}}</td>
+              <td>{{item.quantity}}</td>
+            </tr>
+            {% endif %}
+          {%endfor%}
+        {%endfor%}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

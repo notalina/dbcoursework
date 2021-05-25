@@ -1,0 +1,50 @@
+{% extends 'base_with_header.html' %} {% block content %}
+<div class="w-50 p-3 mx-auto">
+    <div class="jumbotron bg-white">
+        <div>
+            <h1 class="display-4">Просмотр информации</h1>
+            <p> <p>
+            <div class="list-group list-group-flush" ">
+        <a href="{% url 'development_company:managements' %} " class="list-group-item list-group-item-action ">
+            Список строительных управлений
+        </a>
+        <a href="{% url 'development_company:sectors' %} " class="list-group-item list-group-item-action ">
+            Список участков
+        </a>
+        <a href="{% url 'development_company:staff' %} " class="list-group-item list-group-item-action ">
+            Инженерно-технический состав
+        </a>
+        <a href="{% url 'development_company:objs' %} " class="list-group-item list-group-item-action ">
+            Объекты участков
+        </a>
+        <a href="{% url 'development_company:equip' %} " class="list-group-item list-group-item-action ">
+            Техника указанного объекта
+        </a>
+        <a href="{% url 'development_company:equip_by_management' %} " class="list-group-item list-group-item-action ">
+            Техника указанного управления
+        </a>
+        <a href="{% url 'development_company:brigades' %} " class="list-group-item list-group-item-action ">
+            Бригады, работающие на указанном объекте
+        </a>
+        <a href="{% url 'development_company:reports' %} " class="list-group-item list-group-item-action ">
+            Отчет по строительству указанного объекта
+        </a>
+        <a href="{% url 'development_company:expired_works' %} " class="list-group-item list-group-item-action ">
+            Превышение сроков выполнения работ
+        </a>
+        <a href="{% url 'development_company:excess_by_estimation' %} " class="list-group-item list-group-item-action ">
+            Превышение по смете в указанном участке
+        </a>
+        <a href="{% url 'development_company:estimations' %} " class="list-group-item list-group-item-action ">
+            График и сметы объекта 
+        </a>
+        <a href="{% url 'development_company:works' %} " class="list-group-item list-group-item-action ">
+            Найти объекты с видом работы в указанный период времени
+        </a>
+        <a href="{% url 'development_company:brigades_by_time' %} " class="list-group-item list-group-item-action ">
+            Найти бригады, выполнявшие указанный вид работы
+        </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

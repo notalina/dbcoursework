@@ -1,0 +1,34 @@
+{% extends 'base_with_header.html' %} {% block content %}
+
+<div class="container">
+</form>
+  <div>
+    {% if expired_works %}
+    <table class="table">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">№</th>
+          <th scope="col">Тип работы</th>
+          <th scope="col">Назначенная дата начала</th>
+          <th scope="col">Настоящая дата начала</th>
+          <th scope="col">Завершение</th>
+          <th scope="col">Настоящая дата завершения</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in expired_works %}
+        <tr>
+          <th scope="row">{{s.work_type.id}}</th>
+          <td>{{s.work_type.tag}}</th>
+          <td>{{s.work_type.started}}</td>
+          <td>{{s.started_actual}}</td>
+          <td>{{s.work_type.finished}}</td>
+          <td>{{s.finished_actual }}</td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base_with_header.html' %} {% block content %}
+
+<div class="container">
+  <div>
+    <form
+      class="form-inline"
+      action="{% url 'development_company:equip_by_management' %}"
+      method="GET"
+    >
+      <div class="form-row">
+        <label> Укажите номер управления: </label>
+        <div class='col'>
+        <select class="form-control" name="managements">
+          {% for o in all_managements %}
+          <option>{{o.id}}</option>
+          {% endfor %}
+        </select>
+        </div>
+        <div class='col'>
+        <button type="submit" class="btn btn-primary mb-2">Выбрать</button>
+      </div>
+      </div>
+    </form>
+
+    {% if equip_list %}
+    <table class="table">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">№</th>
+          <th scope="col">Тип техники</th>
+          <th scope="col">Название</th>
+          <th scope="col">Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for o in equip_list%}
+        {% for item in o %}
+        <tr>
+          <th scope="row">{{item.equipment.id}}</th>
+          <td>{{item.equipment.equipment_type}}</td>
+          <td>{{item.equipment.tag}}</td>
+          <td>{{item.equipment.status}}</td>
+        </tr>
+        {%endfor%}
+        {%endfor%}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

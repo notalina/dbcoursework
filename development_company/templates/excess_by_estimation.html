@@ -1,0 +1,49 @@
+{% extends 'base_with_header.html' %} {% block content %}
+
+<div class="container">
+  <div>
+    <form
+      class="form-inline"
+      action="{% url 'development_company:excess_by_estimation' %}"
+      method="GET"
+    >
+      <div class="form-row">
+        <label> Укажите номер участка: </label>
+        <div class='col'>
+        <select class="form-control" name="sector">
+          {% for o in sectors %}
+          <option>{{o.id}}</option>
+          {% endfor %}
+        </select>
+        </div>
+        <div class='col'>
+        <button type="submit" class="btn btn-primary mb-2">Выбрать</button>
+      </div>
+      </div>
+    </form>
+
+    {% if consumption_list %}
+    <table class="table">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">Тип материала</th>
+          <th scope="col">Количество</th>
+          <th scope="col">Потрачено</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for list in consumption_list %}
+          {% for some_item in list %}
+            <tr>
+              <td>{{some_item.item}}</td>
+              <td>{{some_item.estimation.quantity}}</td>
+              <td>{{some_item.quantity}}</td>
+            </tr>
+            {%endfor%}
+        {%endfor%}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

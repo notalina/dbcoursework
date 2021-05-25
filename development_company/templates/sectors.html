@@ -1,0 +1,46 @@
+{% extends 'base_with_header.html' %} {% block content %}
+
+<div class="container">
+  <form
+  class="form-inline"
+  action="{% url 'development_company:sectors' %}"
+  method="GET"
+  >
+  <div class="form-row">
+    <label> Укажите номер строительного управления: </label>
+    <div class='col'>
+    <select class="form-control" name="management">
+      {% for m in all_managements %}
+      <option>{{m.id}}</option>
+      {% endfor %}
+    </select>
+    </div>
+    <div class='col'>
+    <button type="submit" class="btn btn-primary mb-2">Выбрать</button>
+  </div>
+  </div>
+</form>
+  <div>
+    {% if sectors %}
+    <table class="table">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">№</th>
+          <th scope="col">Адрес</th>
+          <th scope="col">Площадь, кв. м</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in sectors %}
+        <tr>
+          <th scope="row">{{s.id}}</th>
+          <td>{{s.address}}</td>
+          <td>{{s.square}}</td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

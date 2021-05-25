@@ -1,0 +1,71 @@
+{% extends 'base_with_header.html' %} {% block content %}
+
+<div class="container">
+  <form
+    class="form-inline"
+    action="{% url 'development_company:brigades_by_time' %}"
+    method="GET"
+  >
+    <div class="row">
+      <div class="col">
+        <label> Укажите тип работы: </label>
+        <div>
+          <input type="text" name="work_tag_form" />
+        </div>
+      </div>
+      <div class="col">
+        <label> Укажите начало периода: </label>
+        <div>
+          <input type="date" name="start" />
+        </div>
+      </div>
+      <div class="col">
+        <label> Укажите конец периода: </label>
+        <div>
+          <input type="date" name="finish" />
+        </div>
+      </div>
+        <div class="col">
+          <button type="submit" class="btn btn-primary mb-2">Поиск</button>
+        </div>
+  </form>
+  <div class="container-sm">
+  {% if needed_brigades %}
+      <table class="table">
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">Тип выполняемой работы</th>
+            <th scope="col">Полное имя работника</th>
+            <th scope="col">Специальность</th>
+            <th scope="col">Данные паспорта</th>
+            <th scope="col">Номер телефона</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for b in needed_brigades %} 
+          {% for item in b %} 
+          {% if forloop.counter == 1%}
+          <tr>
+            <td>{{item.work_type.tag}}</td>
+            <td>{{item.worker.full_name}}</td>
+            <td>{{item.worker.speciality}}</td>
+            <td>{{item.worker.passport}}</td>
+            <td>{{item.worker.telephone}}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td></td>
+            <td>{{item.worker.full_name}}</td>
+            <td>{{item.worker.speciality}}</td>
+            <td>{{item.worker.passport}}</td>
+            <td>{{item.worker.telephone}}</td>
+          </tr>
+          {% endif %} 
+          {% endfor %} 
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
